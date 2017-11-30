@@ -1,18 +1,52 @@
-getIDN {
-    out "*IDN?";
-    in "%\$1[^\r\n]";
-    ExtraInput = Ignore;
+OutTerminator = CR LF;
+InTerminator = CR LF;
+
+getID {
+	out "si";
+	in "%s";
 }
 
-cmd {
-    out "\$1";
+initialise {
+	out "in";
+	in "inok";
 }
 
-setD {
-    out "\$1 %d";
+re_zero_to_datum {
+	out "da";
+	in "daok";
 }
-getD {
-    out "\$1?";
-    in "%d";
-    ExtraInput = Ignore;
+
+stopNextInitialisation {
+	out "si";
+	in "siok";
+}
+
+start {
+	out "st";
+	in "stok";
+}
+
+stop {
+	out "sp";
+	in "spok";
+}
+
+setSpeed {
+	out "ds" %02d;
+	in "dsok";
+}
+
+setAcc {
+	out "ac" %04d;
+	in "acok";
+}
+
+setOffset {
+	out "sp" %03d;
+	in "ofok";
+}
+
+setWindow {
+	out "ww" %03d;
+	in "wwok";
 }
