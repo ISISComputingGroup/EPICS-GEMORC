@@ -50,3 +50,8 @@ setWindow {
 	out "ww" %03d;
 	in "wwok";
 }
+
+getStatus {
+    out "rq";
+	in "%64c"
+}
