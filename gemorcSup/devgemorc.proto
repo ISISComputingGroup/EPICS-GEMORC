@@ -16,7 +16,7 @@ re_zero_to_datum {
 	in "daok";
 }
 
-stopNextInitialisation {
+stopNextInit {
 	out "si";
 	in "siok";
 }
@@ -46,12 +46,12 @@ setOffset {
 	in "ofok";
 }
 
-setWindow {
+setWidth {
 	out "ww" %03d;
 	in "wwok";
 }
 
 getStatus {
     out "rq";
-	in "%64c"
+	in "%(\$1.A)d....%(\$1.B)d....%(\$1.C)d.....%(\$1.D)d......%(\$1.E)d......%(\$1.F)d.....%(\$1.G)d..%(\$1.H)d..........%(\$1.I)d";
 }
