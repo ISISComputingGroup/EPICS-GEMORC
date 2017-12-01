@@ -34,24 +34,28 @@ stop {
 setSpeed {
 	out "ds%02d";
 	in "dsok";
+	@init {out "rq"; in "%*35c%02d%*s";}
 }
 
 setAcc {
 	out "ac%04d";
 	in "acok";
+	@init {out "rq"; in "%*42c%03d%*s";}
 }
 
 setOffset {
 	out "of%03d";
 	in "ofok";
+	@init {out "rq"; in "%*25c%04d%*s";}
 }
 
 setWidth {
 	out "ww%03d";
 	in "wwok";
+	@init {out "rq"; in "%*16c%03d%*s";}
 }
 
 getStatus {
     out "rq";
-	in "%(\$1.A)d....%(\$1.B)d....%(\$1.C)d.....%(\$1.D)d......%(\$1.E)d......%(\$1.F)d.....%(\$1.G)d..%(\$1.H)d..........%(\$1.I)d";
+	in "%(\$1.A)d%*4c%(\$1.B)d%*4c%(\$1.C)d%*5c%(\$1.D)d%*6c%(\$1.E)d%*6c%(\$1.F)d%*5c%(\$1.G)d%*2c%(\$1.H)d%*10c%(\$1.I)d";
 }
