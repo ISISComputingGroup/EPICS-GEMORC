@@ -32,22 +32,22 @@ stop {
 }
 
 setSpeed {
-	out "ds" %02d;
+	out "ds%02d";
 	in "dsok";
 }
 
 setAcc {
-	out "ac" %04d;
+	out "ac%04d";
 	in "acok";
 }
 
 setOffset {
-	out "sp" %03d;
+	out "of%03d";
 	in "ofok";
 }
 
 setWidth {
-	out "ww" %03d;
+	out "ww%03d";
 	in "wwok";
 }
 
