@@ -2,7 +2,7 @@ OutTerminator = CR LF;
 InTerminator = CR LF;
 
 getID {
-	out "si";
+	out "id";
 	in "%s";
 }
 
@@ -31,6 +31,18 @@ stop {
 	in "spok";
 }
 
+setWidth {
+	out "ww%03d";
+	in "wwok";
+	@init {out "rq"; in "%*16c%03d%*s";}
+}
+
+setOffset {
+	out "of%04d";
+	in "ofok";
+	@init {out "rq"; in "%*24c%04d%*s";}
+}
+
 setSpeed {
 	out "ds%02d";
 	in "dsok";
@@ -38,24 +50,13 @@ setSpeed {
 }
 
 setAcc {
-	out "ac%04d";
+	out "ac%03d";
 	in "acok";
-	@init {out "rq"; in "%*41c%04d%*s";}
-}
-
-setOffset {
-	out "of%03d";
-	in "ofok";
-	@init {out "rq"; in "%*25c%03d%*s";}
-}
-
-setWidth {
-	out "ww%03d";
-	in "wwok";
-	@init {out "rq"; in "%*16c%03d%*s";}
+	@init {out "rq"; in "%*41c%03d%*s";}
 }
 
 getStatus {
     out "rq";
-	in "%(\$1.A)01d%*4c%(\$1.B)01d%*4c%(\$1.C)01d%*5c%(\$1.D)03d%*6c%(\$1.E)03d%*6c%(\$1.F)02d%*5c%(\$1.G)4d%*2c%(\$1.H)5d%*10c%(\$1.I)3d";
+	# Oscillating[0:1], initialising[5:6], initialised_once[10:11], width[16:19], offset[24:28], speed[34:36], acceleration[41:44], cycles[46:51], backlash[61:64]
+	in "%(\$1.A)01d%*4c%(\$1.B)01d%*4c%(\$1.C)01d%*5c%(\$1.D)03d%*6c%(\$1.E)04d%*6c%(\$1.F)02d%*5c%(\$1.G)3d%*2c%(\$1.H)05d%*10c%(\$1.I)3d";
 }
