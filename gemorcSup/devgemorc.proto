@@ -1,5 +1,5 @@
-OutTerminator = LF;
-InTerminator = LF;
+OutTerminator = CR;
+InTerminator = CR;
 
 getID {
 	out "id";
