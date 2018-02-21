@@ -3,7 +3,7 @@ InTerminator = CR;
 
 getID {
 	out "id";
-	in "%s";
+	in "%#s";
 }
 
 initialise {
