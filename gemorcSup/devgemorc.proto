@@ -50,7 +50,7 @@ setSpeed {
 }
 
 setAcc {
-	out "ac%03d";
+	out "ac%04d";
 	in "OK";
 	@init {out "rq"; in "%*41c%03d%*s";}
 }
