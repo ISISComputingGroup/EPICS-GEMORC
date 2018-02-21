@@ -44,7 +44,7 @@ setOffset {
 }
 
 setSpeed {
-	out "ds%02d";
+	out "ds%03d";
 	in "OK";
 	@init {out "rq"; in "%*34c%02d%*s";}
 }
