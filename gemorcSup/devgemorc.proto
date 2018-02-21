@@ -3,7 +3,8 @@ InTerminator = CR;
 
 getID {
 	out "id";
-	in "%#s";
+	ExtraInput = Ignore;  # If we get more than 512 chars in response, discard the excess and do not throw an error.
+	in "%512c";
 }
 
 initialise {
