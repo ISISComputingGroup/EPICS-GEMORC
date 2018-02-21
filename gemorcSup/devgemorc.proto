@@ -34,25 +34,25 @@ stop {
 setWidth {
 	out "ww%03d";
 	in "OK";
-	@init {out "rq"; in "%*16c%03d%*s";}
+	@init {out "rq"; in "%*16c%03d%*#s";}
 }
 
 setOffset {
 	out "of%+04d";
 	in "OK";
-	@init {out "rq"; in "%*24c%04d%*s";}
+	@init {out "rq"; in "%*24c%04d%*#s";}
 }
 
 setSpeed {
 	out "ds%03d";
 	in "OK";
-	@init {out "rq"; in "%*34c%02d%*s";}
+	@init {out "rq"; in "%*34c%02d%*#s";}
 }
 
 setAcc {
 	out "ac%04d";
 	in "OK";
-	@init {out "rq"; in "%*41c%03d%*s";}
+	@init {out "rq"; in "%*41c%03d%*#s";}
 }
 
 getStatus {
