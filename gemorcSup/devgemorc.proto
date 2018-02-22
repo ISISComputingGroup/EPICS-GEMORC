@@ -3,56 +3,57 @@ InTerminator = CR;
 
 getID {
 	out "id";
-	in "%s";
+	ExtraInput = Ignore;  # If we get more than 512 chars in response, discard the excess and do not throw an error.
+	in "%512c";
 }
 
 initialise {
 	out "in";
-	in "inok";
+	in "OK";
 }
 
 re_zero_to_datum {
 	out "da";
-	in "daok";
+	in "OK";
 }
 
 stopNextInit {
 	out "si";
-	in "siok";
+	in "OK";
 }
 
 start {
 	out "st";
-	in "stok";
+	in "OK";
 }
 
 stop {
 	out "sp";
-	in "spok";
+	in "OK";
 }
 
 setWidth {
 	out "ww%03d";
-	in "wwok";
-	@init {out "rq"; in "%*16c%03d%*s";}
+	in "OK";
+	@init {out "rq"; in "%*16c%03d%*#s";}
 }
 
 setOffset {
 	out "of%+04d";
-	in "ofok";
-	@init {out "rq"; in "%*24c%04d%*s";}
+	in "OK";
+	@init {out "rq"; in "%*24c%04d%*#s";}
 }
 
 setSpeed {
-	out "ds%02d";
-	in "dsok";
-	@init {out "rq"; in "%*34c%02d%*s";}
+	out "ds%03d";
+	in "OK";
+	@init {out "rq"; in "%*34c%02d%*#s";}
 }
 
 setAcc {
-	out "ac%03d";
-	in "acok";
-	@init {out "rq"; in "%*41c%03d%*s";}
+	out "ac%04d";
+	in "OK";
+	@init {out "rq"; in "%*41c%03d%*#s";}
 }
 
 getStatus {
