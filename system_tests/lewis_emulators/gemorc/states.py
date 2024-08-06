@@ -1,5 +1,6 @@
-from lewis.core.statemachine import State
 from math import floor
+
+from lewis.core.statemachine import State
 
 
 class StoppedState(State):
