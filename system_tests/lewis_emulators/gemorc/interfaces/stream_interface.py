@@ -2,9 +2,9 @@ from lewis.adapters.stream import StreamInterface
 from lewis.core.logging import has_log
 from lewis.utils.command_builder import CmdBuilder
 
+
 @has_log
 class GemorcStreamInterface(StreamInterface):
-
     # Commands that we expect via serial during normal operation
     commands = {
         CmdBuilder("get_id").escape("id").build(),
@@ -121,8 +121,10 @@ class GemorcStreamInterface(StreamInterface):
         Get the current state of the collimator. This is backwards engineered from the VI. I haven't actually seen
         what the real thing returns as the VI code doesn't match the spec
         """
-        request_format = "{oscillating:01d}    {initialising:01d}    {initialised:01d}     {width:03d}     " \
-                         "{offset:+04d}      {speed:02d}     {acceleration:03d}  {cycles:05d}          {backlash:03d}"
+        request_format = (
+            "{oscillating:01d}    {initialising:01d}    {initialised:01d}     {width:03d}     "
+            "{offset:+04d}      {speed:02d}     {acceleration:03d}  {cycles:05d}          {backlash:03d}"
+        )
         status_string = request_format.format(
             oscillating=int(self.device.is_oscillating()),
             initialising=int(self.device.is_initialising()),
@@ -132,6 +134,6 @@ class GemorcStreamInterface(StreamInterface):
             speed=int(self.device.get_speed()),
             acceleration=int(self.device.get_acceleration()),
             cycles=int(self.device.get_complete_cycles()),
-            backlash=int(self.device.get_backlash())
+            backlash=int(self.device.get_backlash()),
         )
         return status_string
