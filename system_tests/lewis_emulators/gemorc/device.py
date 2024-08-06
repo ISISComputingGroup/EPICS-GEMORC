@@ -13,7 +13,6 @@ from .states import (
 
 
 class SimulatedGemorc(StateMachineDevice):
-
     def _initialize_data(self):
         """
         Initialize all of the device's attributes.
@@ -41,40 +40,40 @@ class SimulatedGemorc(StateMachineDevice):
 
     def _get_state_handlers(self):
         return {
-            'initialising': InitialisingState(),
-            'initialised': InitialisedState(),
-            'oscillating': OscillatingState(),
-            'stopped': StoppedState(),
-            'idle': IdleState(),
-            'reset': ResetState(),
+            "initialising": InitialisingState(),
+            "initialised": InitialisedState(),
+            "oscillating": OscillatingState(),
+            "stopped": StoppedState(),
+            "idle": IdleState(),
+            "reset": ResetState(),
         }
 
     def _get_initial_state(self):
-        return 'reset'
+        return "reset"
 
     def _get_transition_handlers(self):
-        return OrderedDict([
-            (('idle', 'initialising'), lambda: self.initialisation_requested),
-
-            (('initialising', 'initialised'), lambda: self.stop_initialisation or
-                                                      self.time_spent_initialising >= self.time_to_initialise),
-
-            (('initialised', 'oscillating'), lambda: self.start_requested),
-            (('initialised', 'initialising'), lambda: self.initialisation_requested),
-
-            (('oscillating', 'stopped'), lambda: not self.start_requested),
-            (('oscillating', 'initialising'), lambda: self.initialisation_requested),
-
-            (('stopped', 'initialising'), lambda: self.initialisation_requested),
-            (('stopped', 'oscillating'), lambda: self.start_requested),
-
-            (('idle', 'reset'), lambda: self.reset),
-            (('initialising', 'reset'), lambda: self.reset),
-            (('initialised', 'reset'), lambda: self.reset),
-            (('oscillating', 'reset'), lambda: self.reset),
-            (('stopped', 'reset'), lambda: self.reset),
-            (('reset', 'idle'), lambda: not self.reset),
-        ])
+        return OrderedDict(
+            [
+                (("idle", "initialising"), lambda: self.initialisation_requested),
+                (
+                    ("initialising", "initialised"),
+                    lambda: self.stop_initialisation
+                    or self.time_spent_initialising >= self.time_to_initialise,
+                ),
+                (("initialised", "oscillating"), lambda: self.start_requested),
+                (("initialised", "initialising"), lambda: self.initialisation_requested),
+                (("oscillating", "stopped"), lambda: not self.start_requested),
+                (("oscillating", "initialising"), lambda: self.initialisation_requested),
+                (("stopped", "initialising"), lambda: self.initialisation_requested),
+                (("stopped", "oscillating"), lambda: self.start_requested),
+                (("idle", "reset"), lambda: self.reset),
+                (("initialising", "reset"), lambda: self.reset),
+                (("initialised", "reset"), lambda: self.reset),
+                (("oscillating", "reset"), lambda: self.reset),
+                (("stopped", "reset"), lambda: self.reset),
+                (("reset", "idle"), lambda: not self.reset),
+            ]
+        )
 
     def initialise(self):
         self.initialisation_requested = True
@@ -123,10 +122,12 @@ class SimulatedGemorc(StateMachineDevice):
         return self.state == InitialisingState.__name__
 
     def has_been_initialised(self):
-        return self.state in (s.__name__ for s in (InitialisedState, OscillatingState, StoppedState))
+        return self.state in (
+            s.__name__ for s in (InitialisedState, OscillatingState, StoppedState)
+        )
 
     def get_complete_cycles(self):
         return self.complete_cycles
 
     def get_backlash(self):
-        return 0.5*float(self.speed**2)/float(max(self.acceleration,1))
+        return 0.5 * float(self.speed**2) / float(max(self.acceleration, 1))

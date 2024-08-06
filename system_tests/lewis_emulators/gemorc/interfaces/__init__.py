@@ -1,3 +1,3 @@
 from .stream_interface import GemorcStreamInterface
 
-__all__ = ['GemorcStreamInterface']
+__all__ = ["GemorcStreamInterface"]
